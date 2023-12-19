@@ -35,6 +35,11 @@ jobs:
         arch: [x86_64, arm64]
       fail-fast: false
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
       - name: Checkout Repo
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
       # If we pass a PR Number when triggering the workflow we will retrieve the PR info and get its headSHA
