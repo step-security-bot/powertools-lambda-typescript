@@ -32,6 +32,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ (github.event.workflow_run.conclusion == 'success') || (github.event_name == 'workflow_dispatch') }}
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
       - name: checkout
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab  # v3.5.2
         with:
@@ -83,6 +88,11 @@ jobs:
     outputs:
       DOCS_ALIAS: ${{ steps.set-alias.outputs.DOCS_ALIAS }}
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
       - name: Set docs alias
         id: set-alias
         run: |
